@@ -8,11 +8,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.demo.calculator.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     TextView textView;
+    Calculator_main calculator_main=new Calculator_main();
     String s="";
 ActivityMainBinding binding;
 
@@ -25,13 +27,29 @@ ActivityMainBinding binding;
         binding.displayText2.setTextSize(24);
         binding.displayText.setTextColor(Color.parseColor("#FFFFFF"));
         binding.displayText2.setTextColor(Color.parseColor("#868B8E"));
+
+
         binding.e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                binding.displayText.setText(s);
+
                 binding.displayText.setTextSize(24);
                 binding.displayText.setTextColor(Color.parseColor("#868B8E"));
                 binding.displayText2.setTextColor(Color.parseColor("#FFFFFF"));
                 binding.displayText2.setTextSize(34);
+
+                if(!calculator_main.calculate(s).equals("Invalid equation")){
+
+                    binding.displayText2.setText(calculator_main.calculate(s));
+
+                }
+                else {binding.displayText2.setText("");
+                    Toast.makeText(MainActivity.this, "Plase valid equation..", Toast.LENGTH_SHORT).show();
+                }
+
+
                 s="";
 
             }
@@ -133,6 +151,61 @@ ActivityMainBinding binding;
                 binding.displayText.setText(s);
             }
         });
+
+
+
+
+        binding.sum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s+="+";
+                binding.displayText.setText(s);
+            }
+        });
+        binding.sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s+="-";
+                binding.displayText.setText(s);
+            }
+        });
+        binding.mul.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s+="*";
+                binding.displayText.setText(s);
+            }
+        });
+
+
+
+        binding.div.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s+="/";
+                binding.displayText.setText(s);
+            }
+        });
+        binding.dot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s+=".";
+                binding.displayText.setText(s);
+            }
+        });
+
+
+        binding.pow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                s+="^";
+                binding.displayText.setText(s);
+            }
+        });
+
+
+
+
 
 
     }
