@@ -43,14 +43,13 @@ ActivityMainBinding binding;
                 if(!calculator_main.calculate(s).equals("Invalid equation")){
 
                     binding.displayText2.setText(calculator_main.calculate(s));
-
+                      s=calculator_main.calculate(s);
                 }
                 else {binding.displayText2.setText("");
                     Toast.makeText(MainActivity.this, "Plase valid equation..", Toast.LENGTH_SHORT).show();
                 }
 
 
-                s="";
 
             }
         });
@@ -158,22 +157,55 @@ ActivityMainBinding binding;
         binding.sum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s+="+";
-                binding.displayText.setText(s);
+                if(s!=""&& s.charAt(s.length()-1 )!='+'&&
+                s.charAt(s.length()-1)!='-'&&
+                s.charAt(s.length()-1)!='*'&&
+                s.charAt(s.length()-1)!='/'
+                        &&s.charAt(s.length()-1)!='.'
+                  )
+
+                {
+                    s+="+";
+                    binding.displayText.setText(s);
+                }
+               else{   Toast.makeText(MainActivity.this, "Place valid input ", Toast.LENGTH_SHORT).show();
+               }
             }
         });
         binding.sub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s+="-";
-                binding.displayText.setText(s);
+                if(s!=""&& s.charAt(s.length()-1 )!='+'&&
+                        s.charAt(s.length()-1)!='-'&&
+                        s.charAt(s.length()-1)!='*'&&
+                        s.charAt(s.length()-1)!='/'
+                        &&s.charAt(s.length()-1)!='.'
+                )
+
+                {
+                    s+="-";
+                    binding.displayText.setText(s);
+                }
+                else{   Toast.makeText(MainActivity.this, "Place valid input ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         binding.mul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s+="*";
-                binding.displayText.setText(s);
+                if(s!=""&& s.charAt(s.length()-1 )!='+'&&
+                        s.charAt(s.length()-1)!='-'&&
+                        s.charAt(s.length()-1)!='*'&&
+                        s.charAt(s.length()-1)!='/'
+                        &&s.charAt(s.length()-1)!='.'
+                )
+
+                {
+                    s+="*";
+                    binding.displayText.setText(s);
+                }
+                else{   Toast.makeText(MainActivity.this, "Place valid input ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -182,15 +214,37 @@ ActivityMainBinding binding;
         binding.div.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s+="/";
-                binding.displayText.setText(s);
+                if(s!=""&& s.charAt(s.length()-1 )!='+'&&
+                        s.charAt(s.length()-1)!='-'&&
+                        s.charAt(s.length()-1)!='*'&&
+                        s.charAt(s.length()-1)!='/'
+                        &&s.charAt(s.length()-1)!='.'
+                )
+
+                {
+                    s+="/";
+                    binding.displayText.setText(s);
+                }
+                else{   Toast.makeText(MainActivity.this, "Place valid input ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         binding.dot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                s+=".";
-                binding.displayText.setText(s);
+                if(s!=""&& s.charAt(s.length()-1 )!='+'&&
+                        s.charAt(s.length()-1)!='-'&&
+                        s.charAt(s.length()-1)!='*'&&
+                        s.charAt(s.length()-1)!='/'
+                        &&s.charAt(s.length()-1)!='.'
+                )
+
+                {
+                    s+=".";
+                    binding.displayText.setText(s);
+                }
+                else{   Toast.makeText(MainActivity.this, "Place valid input ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -231,4 +285,9 @@ ActivityMainBinding binding;
 
         }
     };
+
+
+
+
+
 }
