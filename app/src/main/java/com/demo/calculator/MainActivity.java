@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     Calculator_main calculator_main=new Calculator_main();
     String s="";
+    static int  bk=0;
 ActivityMainBinding binding;
 
     @Override
@@ -60,15 +61,27 @@ ActivityMainBinding binding;
         binding.close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 if(s.length()!=0){
+                    if(s=="("){bk--;}
+                    if(s==")"){bk++;}
+
+
                s= s.substring(0, s.length() - 1);
-                binding.displayText.setText(s);}
+                binding.displayText.setText(s);
+
+
+                }
+
             }
         });
         binding.close.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 s="";
+                bk=0;
                 binding.displayText.setText(s);
                 return false;
             }
@@ -77,6 +90,7 @@ ActivityMainBinding binding;
             @Override
             public void onClick(View view) {
              s="";
+             bk=0;
                 binding.displayText.setText(s);
             }
         });
@@ -259,7 +273,54 @@ ActivityMainBinding binding;
 
 
 
+       binding.braket.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               if(s==""){
+                   s+="(";
+                   bk++;
+               }
 
+           else if( s.charAt(s.length()-1 )!='+'&&
+                    s.charAt(s.length()-1)!='-'&&
+                    s.charAt(s.length()-1)!='*'&&
+                    s.charAt(s.length()-1)!='/'&&
+                    s.charAt(s.length()-1)!='('&&
+                    s.charAt(s.length()-1)!='.'
+                    ){
+                if(bk!=0)
+                 {
+                     bk--;
+                     s+=")";
+
+                }
+                else{
+                    s+="*(";
+                    bk++;
+                }
+
+            }
+
+            else{
+
+                if(     s.charAt(s.length()-1 )=='+'||
+                        s.charAt(s.length()-1)=='-'||
+                        s.charAt(s.length()-1)=='*'||
+                        s.charAt(s.length()-1)=='/'||
+                        s.charAt(s.length()-1)=='('
+
+                ){s+="(";
+                    bk++;}
+                else{s+="*(";
+                    bk++;}
+
+
+
+
+            }
+               binding.displayText.setText(s);
+           }
+       });
 
 
     }
