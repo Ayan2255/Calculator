@@ -35,7 +35,7 @@ ActivityMainBinding binding;
             public void onClick(View view) {
 
                 binding.displayText.setText(s);
-
+int a;
                 binding.displayText.setTextSize(24);
                 binding.displayText.setTextColor(Color.parseColor("#868B8E"));
                 binding.displayText2.setTextColor(Color.parseColor("#FFFFFF"));
