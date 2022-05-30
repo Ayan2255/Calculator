@@ -1,18 +1,28 @@
 package com.demo.calculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demo.calculator.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseFirestore firebaseFirestore;
     TextView textView;
     Calculator_main calculator_main=new Calculator_main();
     String s="";
@@ -23,6 +33,7 @@ ActivityMainBinding binding;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivityMainBinding.inflate(getLayoutInflater());
+        firebaseFirestore=FirebaseFirestore.getInstance();
         setContentView(binding.getRoot());
         binding.displayText.setTextSize(34);
         binding.displayText2.setTextSize(24);
@@ -42,9 +53,29 @@ int a;
                 binding.displayText2.setTextSize(34);
 
                 if(!calculator_main.calculate(s).equals("Invalid equation")){
-
+                  // binding.displayText2.getVisibility();
                     binding.displayText2.setText(calculator_main.calculate(s));
                       s=calculator_main.calculate(s);
+                    Map<String,Object> map=new HashMap();
+
+                    map.put("Equation",binding.displayText2.getText().toString());
+                    map.put("Result",binding.displayText.getText().toString());
+
+                    firebaseFirestore.collection("History").document("first")
+                            .set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(MainActivity.this, "Save data..", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(MainActivity.this, "Érror..", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+
                 }
                 else {binding.displayText2.setText("");
                     Toast.makeText(MainActivity.this, "Plase valid equation..", Toast.LENGTH_SHORT).show();
@@ -321,6 +352,17 @@ int a;
                binding.displayText.setText(s);
            }
        });
+
+       binding.displayText2.requestFocus();
+       binding.displayText2.setBackgroundResource(android.R.color.transparent);
+
+
+        binding.displayText.requestFocus();
+        binding.displayText.setBackgroundResource(android.R.color.transparent);
+
+
+binding.displayText2.setShowSoftInputOnFocus(false);
+        binding.displayText.setShowSoftInputOnFocus(false);
 
 
     }

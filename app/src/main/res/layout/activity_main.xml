@@ -17,20 +17,23 @@
         android:background="@color/black"
         android:orientation="vertical">
 
-        <TextView
+        <EditText
             android:id="@+id/display_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:gravity="right|bottom"
+
             android:padding="2dp"
             android:textColor="@color/white"
-            android:textSize="34sp">
+            android:textSize="34sp"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:visibility="visible">
 
-        </TextView>
+        </EditText>
 
-        <TextView
+        <EditText
             android:id="@+id/display_text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +44,7 @@
             android:textColor="@color/white"
             android:textSize="34sp">
 
-        </TextView>
+        </EditText>
 
 
     </LinearLayout>
@@ -64,9 +67,21 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/history"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_gravity="left"
+            android:layout_margin="7dp"
+            android:background="@drawable/ic_baseline_access_time_24"
+
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck">
+
+        </Button>
+
+        <Button
             android:id="@+id/close"
             android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:layout_gravity="right"
             android:layout_margin="7dp"
             android:background="@drawable/ic_baseline_backspace_24"
